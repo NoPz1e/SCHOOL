@@ -24,3 +24,10 @@ LEFT OUTER JOIN loja1
 ON filmes.ID_filme = loja1.ID_filme 
 WHERE alugado='0'
 ORDER BY titulo;
+
+-- ----EX5----
+SELECT primeiro_nome, ultimo_nome FROM atores
+LEFT OUTER JOIN filmes 
+ON atores.ID_filme = filmes.ID_filme
+WHERE primeiro_nome = 'Julia' AND ultimo_nome = 'Zellweger'
+ORDER BY primeiro_nome, ultimo_nome;

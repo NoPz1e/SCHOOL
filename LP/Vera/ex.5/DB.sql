@@ -46,3 +46,5 @@ INSERT INTO loja1 VALUES(1,default),
 (3,'1'),
 (4,'1'),
 (6,default);
+
+INSERT INTO atores VALUES(4,'Julia', 'Zellweger');
