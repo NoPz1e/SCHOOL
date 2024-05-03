@@ -32,4 +32,4 @@
 
 1. **Segurança limitada:** Menos seguros, porque não tem encapsulamento adicional.
 
-2. **COntrolo de tráfego limitado:** Dificil controlar e gerengiar o tráfego, pode ter problemas de congestionamento. 
+2. **Controlo de tráfego limitado:** Dificil controlar e gerengiar o tráfego, pode ter problemas de congestionamento. 
