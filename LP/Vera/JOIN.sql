@@ -28,3 +28,5 @@ INSERT INTO funcionarios VALUES(default, 'Alberto', 'Fig da foz', 987654321),
 INSERt INTO clientes VALUES(default, 'Fernando', 'faro', 635764664, 2),
 (default, 'Ana', 'viseu', 635764664, 3),
 (default, 'Rodrigo', 'Cantanhede', 635764664, 1);
+
+SELECT * FROM clientes CROSS JOIN funcionarios ORDER BY ID_funcionario;
