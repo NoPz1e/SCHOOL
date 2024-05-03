@@ -31,3 +31,7 @@ INSERT INTO atores VALUES (2,'Toquio','Martins'),
 (4,'Alberto','Silva'),
 (6,'Jahari','Nunes'),
 (4,'Alexandra','alencastre');
+
+INSERT INTO categorias VALUES(4, 'drama'),(5,'drama'),(6,'+18');
+
+INSERT INTO atores VALUES(5,'Cristina', 'Ferreia');
