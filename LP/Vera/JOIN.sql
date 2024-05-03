@@ -29,4 +29,13 @@ INSERt INTO clientes VALUES(default, 'Fernando', 'faro', 635764664, 2),
 (default, 'Ana', 'viseu', 635764664, 3),
 (default, 'Rodrigo', 'Cantanhede', 635764664, 1);
 
+-- ----CROS JOIN----
+
 SELECT * FROM clientes CROSS JOIN funcionarios ORDER BY ID_funcionario;
+
+-- ----INNER JOIN----
+SELECT *  FROM clientes INNER JOIN funcionarios on ID_funcionario = criado_por_IDFunc;
+
+SELECT clientes.contacto, funcionarios.nome, funcionarios.contacto FROM clientes INNER JOIN funcionarios on ID_funcionario = criado_por_IDFunc;
+
+SELECT clientes.contacto AS contacto_cliente, funcionarios.nome AS nome_funcionario, funcionarios.contacto FROM clientes INNER JOIN funcionarios on ID_funcionario = criado_por_IDFunc;
