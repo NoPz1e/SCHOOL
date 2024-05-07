@@ -1,0 +1,11 @@
+CREATE DATABASE DML1;
+
+USE DML1;
+
+CREATE TABLE IF NOT EXISTS SUM (
+  pedidoID INT,
+  Empresa VARCHAR(20),
+  Quantidade INT
+);
+
+INSERT INTO SUM VALUES(1,"A", 20), (2,"B", 50), (3,"A", 50);
