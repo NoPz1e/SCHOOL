@@ -37,3 +37,5 @@ CREATE TABLE IF NOT EXISTS minMax(
 );
 
 INSERT INTO minMax VALUES(1,"C01","2020-05-06"),(2,"C03","2020-09-05"),(3,"C03","2020-08-01");
+
+SELECT min(quantidade) AS valor_minimo, max(quantidade) AS valor_maximo FROM SUM;
