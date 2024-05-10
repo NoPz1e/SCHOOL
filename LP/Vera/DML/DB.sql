@@ -36,6 +36,16 @@ CREATE TABLE IF NOT EXISTS minMax(
   Data_Pedido date
 );
 
+SELECT min(quantidade) AS valor_minimo, max(quantidade) AS valor_maximo FROM SUM;
+
 INSERT INTO minMax VALUES(1,"C01","2020-05-06"),(2,"C03","2020-09-05"),(3,"C03","2020-08-01");
 
-SELECT min(quantidade) AS valor_minimo, max(quantidade) AS valor_maximo FROM SUM;
+SELECT min(Data_Pedido) AS Data_antiga, max(Data_Pedido) AS Data_recente FROM minMax;
+
+
+CREATE TABLE IF NOT EXISTS pedidos(
+  id_pedido INT,
+  id_cliente INT,
+  data_pedido DATE,
+  
+)
