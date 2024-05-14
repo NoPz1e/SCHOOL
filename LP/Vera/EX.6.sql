@@ -100,7 +100,28 @@ ON veiculo.Matricula = estaciona.veiculo_Matricula
 WHERE Matricula LIKE '%S%' AND cor = 'verde';
 
 -- ---EX.H---
-SELECT Nome FROM cliente
-INNER JOIN estaciona, veiculo
-ON cliente.NIF = veiculo.Cliente_NIF and veiculo.Matricula = estaciona.veiculo_Matricula
+SELECT Nome
+FROM cliente 
+INNER JOIN veiculo ON cliente.NIF = veiculo.Cliente_NIF
+INNER JOIN estaciona ON veiculo.Matricula = estaciona.veiculo_Matricula
 WHERE estaciona.cod = 2;
+
+-- ---EX.I---
+SELECT NIF
+FROM cliente 
+INNER JOIN veiculo ON cliente.NIF = veiculo.Cliente_NIF
+INNER JOIN estaciona ON veiculo.Matricula = estaciona.veiculo_Matricula
+WHERE estaciona.cod = 3;
+
+-- ---EX.J---
+SELECT Nome, Marca
+FROM modelo 
+INNER JOIN veiculo ON modelo.codMod = veiculo.Modelo_codMod
+INNER JOIN estaciona ON veiculo.Matricula = estaciona.veiculo_Matricula
+WHERE estaciona.cod = 2;
+
+-- ---EX.L---
+SELECT modelo.Nome AS Nome_Modelo, modelo.Marca, veiculo.Matricula, cliente.Nome AS Dono
+FROM modelo 
+INNER JOIN veiculo ON modelo.codMod = veiculo.Modelo_codMod
+INNER JOIN cliente ON cliente.NIF = veiculo.Cliente_NIF;
