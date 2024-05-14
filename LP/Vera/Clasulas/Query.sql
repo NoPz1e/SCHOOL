@@ -35,3 +35,9 @@ CREATE TABLE IF NOT EXISTS perguntas(
   resposta_pergunta VARCHAR(10),
   PRIMARY KEY (id_pergunta)
 );
+
+ALTER TABLE perguntas
+ADD CONSTRAINT validação_pergunta CHECK (texto_pergunta IS NOT NULL AND resposta_pergunta IS NOT NULL);
+
+INSERT INTO perguntas(id_pergunta) VAlUES(1),(2);
+
