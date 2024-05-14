@@ -46,6 +46,6 @@ SELECT min(Data_Pedido) AS Data_antiga, max(Data_Pedido) AS Data_recente FROM mi
 CREATE TABLE IF NOT EXISTS pedidos(
   id_pedido INT,
   id_cliente INT,
-  data_pedido DATE,
+  data_pedido DATE,  
   
 )
