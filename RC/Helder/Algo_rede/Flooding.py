@@ -1,60 +1,63 @@
-import sys, random
+import random, turtle
 
-list_ip = ['139.115.83.87',
-  '90.37.164.189',
-  '3.220.150.7',
-  '133.45.13.242',
-  '243.146.198.160',
-  '125.133.89.71',
-  '9.147.69.124', 
-  '172.151.150.170',
-  '231.10.247.143',
-  '115.82.113.127',
-  '15.183.17.108',
-  '241.108.113.190',
-  '81.74.29.61',
-  '227.119.28.180',
-  '177.217.58.245',
-  '154.21.92.169',
-  '175.199.172.37',
-  '154.196.152.146',
-  '6.208.54.80',
-  '12.79.163.21'
-]
+list_ip = []
 
-# Asks target IP
-target_ip = input("Target IP: ")
+def random_IPS():
+  first = random.randint(0, 255)
+  second = random.randint(0, 255)
+  third = random.randint(0, 255)
+  fourth = random.randint(0, 255)
+  return f"{first}.{second}.{third}.{fourth}"
 
-# Initialize variable
-not_found = (bool)
+for i in range(20):
+  list_ip.append(random_IPS())
+  
+# Initialize target IP
+target_ip = random.randint(0, len(list_ip)) # -1
 
-# Itterate through IPs to find the target
+scsize = (500, 500)
+screen = turtle.getscreen()
+turtle.screensize(scsize[0], scsize[1])
+
+
+posList = []
+
 for ip in list_ip:
-  if target_ip == ip:
-    not_found = False
-    break
-  not_found = True
+  color = "black"
+  pos = ((random.choice([-1, 1])) * (random.randint(50, scsize[0] - 50)),
+          (random.choice([-1, 1])) *  random.randint(50, scsize[1] - 50))
+  posList.append(pos)
+  if list_ip.index(ip) == target_ip:
+    color = "red"
+  if list_ip.index(ip) == 0:
+    color = "blue"
+  turtle.penup()
+  turtle.goto(pos[0], pos[1])
+  turtle.pendown()
+  turtle.dot(10, color)
+  turtle.penup()
+  turtle.goto(pos[0] - 50, pos[1] + 15)
+  turtle.write(str(ip), font= ("Times New Roman", 15, "normal"))
 
-# If not found, place in the end
-if not_found:
-  list_ip.append(target_ip)
+turtle.penup()
+turtle.goto(posList[0])
 
-# Initialize random int
-nHops = 30 # random.randint(1, 15)
+# Initialize number of hops
+nHops = 30
 
-print("Trying to reach " + str(target_ip) + " at maximum hops: " + str(nHops))
+print("Trying to reach " + str(list_ip[target_ip]) + " at maximum hops: " + str(nHops))
 
 black_list_ips = []
 
-for i in range(nHops):
+turtle.pendown()
+for hop in range(nHops):
   ip = random.randint(0, len(list_ip) - 1)
   if ip in black_list_ips:
-    i -= 1
+    hop -= 1
     continue
-  print(str(i + 1) + "\t" + str(list_ip[ip]))
+  turtle.goto(posList[ip])
+  print(str(hop +1) + "\t" + str(ip) + "\t" + str(list_ip[ip]))
   black_list_ips.append(ip)
-  if list_ip[ip] == target_ip:
-    print(target_ip + " reached successfully.")
+  if list_ip[ip] == list_ip[target_ip]:
+    print(list_ip[target_ip] + " reached successfully.")
     break
-
-input()
