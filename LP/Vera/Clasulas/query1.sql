@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS orquestra(
   rating DECIMAL(3,1),
   cidade VARCHAR(15),
   pais VARCHAR(15),
+  ano_criacao year,
   PRIMARY KEY(id_orquestra)
 );
 
@@ -33,10 +34,10 @@ CREATE TABLE IF NOT EXISTS concertos(
 );
 
 INSERT INTO orquestra(nome, rating, cidade, pais)
-VALUES('FQuiaense', 1.2, 'Quiaios','Portugal'),
-('Spaiao', 99.8, 'paiao','Portugal'),
-('opera', 88.6, 'New your','USA'),
-('FRMira', 72.8, 'Mira','Portugal');
+VALUES('FQuiaense', 1.2, 'Quiaios','Portugal',2016),
+('Spaiao', 99.8, 'paiao','Portugal', 2010),
+('opera', 88.6, 'New your','USA',1986),
+('FRMira', 72.8, 'Mira','Portugal', 1994);
 
 INSERT INTO membros(nome, função, anos_experiencia, salario, id_orquestra) 
 VALUES('Simao','Clarinete',10, 20.0,1),
@@ -66,15 +67,38 @@ WHERE pais IN (
 -- ---B---
 SELECT nome, função 
 FROM membros
-WHERE id_orquestra IN (
+WHERE anos_experiencia > 10 AND id_orquestra IN (
   SELECT id_orquestra 
   FROM orquestra
-  WHERE rating > 8
-) 
-AND anos_experiencia > 10;
+  WHERE rating > 8.0
+);
 
 
 -- ---C---
 SELECT nome, função
 FROM membros
-WHERE 
+WHERE salario > (
+  SELECT AVG(salario) 
+  FROM membros
+  WHERE função = 'Trombone'
+);
+
+-- ---D---
+ALTER TABLE orquestra ADD COLUMN ano_criacao year;
+
+SELECT nome FROM orquestra
+WHERE ano_criacao(
+  SELECT ano_criacao
+  FROM orquestra
+  WHERE nome = 'Chamber Orchestra')
+AND rating > '7.5';
+
+
+-- ---E---
+ALTER TABLE orquestra ADD COLUMN qtd_membros int;
+
+SELECT nome,qtd_membros FROM orquestra
+WHERE qtd_membros > (
+  SELECT AVG(qtd_membros)
+  FROM orquestra
+);
