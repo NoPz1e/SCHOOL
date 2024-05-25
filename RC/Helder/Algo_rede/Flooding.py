@@ -50,14 +50,26 @@ print("Trying to reach " + str(list_ip[target_ip]) + " at maximum hops: " + str(
 black_list_ips = []
 
 turtle.pendown()
-for hop in range(nHops):
+
+hops = 0
+
+while True:
+
   ip = random.randint(0, len(list_ip) - 1)
-  if ip in black_list_ips:
-    hop -= 1
+  if ip in black_list_ips or ip == 0:
     continue
-  turtle.goto(posList[ip])
-  print(str(hop +1) + "\t" + str(ip) + "\t" + str(list_ip[ip]))
-  black_list_ips.append(ip)
-  if list_ip[ip] == list_ip[target_ip]:
-    print(list_ip[target_ip] + " reached successfully.")
+
+  if hops != nHops:
+    turtle.goto(posList[ip])
+    hops+=1
+
+    print(str(hops) + "\t" + str(ip) + "\t" + str(list_ip[ip]))
+    black_list_ips.append(ip)
+    if list_ip[ip] == list_ip[target_ip]:
+      print(list_ip[target_ip] + " reached successfully.")
+      break
+  else:
     break
+            
+
+turtle.done()
