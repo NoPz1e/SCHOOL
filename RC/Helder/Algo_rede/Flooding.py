@@ -13,7 +13,7 @@ for i in range(20):
   list_ip.append(random_IPS())
   
 # Initialize target IP
-target_ip = random.randint(0, len(list_ip)) # -1
+target_ip = random.randint(0, len(list_ip) -1) # -1
 
 scsize = (500, 500)
 screen = turtle.getscreen()
@@ -42,8 +42,9 @@ for ip in list_ip:
 turtle.penup()
 turtle.goto(posList[0])
 
-# Initialize number of hops
+# Initialize number of hops and packages
 nHops = 30
+nPackage = 2
 
 print("Trying to reach " + str(list_ip[target_ip]) + " at maximum hops: " + str(nHops))
 
@@ -51,25 +52,58 @@ black_list_ips = []
 
 turtle.pendown()
 
-hops = 0
 
-while True:
 
-  ip = random.randint(0, len(list_ip) - 1)
-  if ip in black_list_ips or ip == 0:
-    continue
+def virtualCircuit():
+  hops = 0
+  while True:
 
-  if hops != nHops:
-    turtle.goto(posList[ip])
-    hops+=1
+    ip = random.randint(0, len(list_ip) - 1)
+    if ip in black_list_ips or ip == 0:
+      continue
 
-    print(str(hops) + "\t" + str(ip) + "\t" + str(list_ip[ip]))
-    black_list_ips.append(ip)
-    if list_ip[ip] == list_ip[target_ip]:
-      print(list_ip[target_ip] + " reached successfully.")
+    if hops != nHops:
+      turtle.goto(posList[ip])
+      hops+=1
+
+      print(str(hops) + "\t" + str(ip) + "\t" + str(list_ip[ip]))
+      black_list_ips.append(ip)
+      if list_ip[ip] == list_ip[target_ip]:
+        print(list_ip[target_ip] + " reached successfully.")
+        break
+    else:
       break
-  else:
-    break
             
+
+def datagram(packages = (int)):
+  hops = 0
+  for p in range(packages):
+    turtle.penup()
+    turtle.goto(posList[0])
+    turtle.pendown()
+    while True:
+
+      ip = random.randint(0, len(list_ip) - 1)
+      if ip in black_list_ips or ip == 0:
+        continue
+
+      if hops != nHops:
+        turtle.goto(posList[ip])
+        hops+=1
+
+        print(str(hops) + "\t" + str(ip) + "\t" + str(list_ip[ip]))
+        black_list_ips.append(ip)
+        if list_ip[ip] == list_ip[target_ip]:
+          print(list_ip[target_ip] + " reached successfully.")
+          black_list_ips.pop()
+          break
+      else:
+        break
+
+ans = input("Datagram oe Virtual Circuit? (1,2): ")
+if ans == '1':
+  datagram(nPackage)
+else:
+  virtualCircuit()
 
 turtle.done()
