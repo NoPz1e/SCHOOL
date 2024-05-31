@@ -31,3 +31,16 @@ CREATE VIEW filmes_bons AS
 SELECT Titulo_filme
 FROM Filmes
 WHERE Genero_filme = 'Action' and Avaliação > '7.5';
+
+
+CREATE OR REPLACE VIEW filmes_bons AS
+SELECT Titulo_filme
+FROM Filmes
+WHERE Genero_filme = 'Action' and Avaliação > '7.0';
+
+DROP VIEW filmes_bons;
+
+CREATE VIEW filmes_Muito_bons AS
+SELECT Titulo_filme
+FROM Filmes
+WHERE Genero_filme = 'Action' and Avaliação > '7.5';
